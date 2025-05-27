@@ -5,17 +5,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name = "portfolio")
 public class Portfolio {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long portfolioId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
 	private String name;
 	@OneToOne
 	private User user;
