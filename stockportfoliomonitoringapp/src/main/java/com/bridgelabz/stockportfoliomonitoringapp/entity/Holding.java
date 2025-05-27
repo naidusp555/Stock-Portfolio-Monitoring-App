@@ -1,14 +1,25 @@
 package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "holding")
 public class Holding {
 	
-	private long id;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long holdingId;
 	private String stockSymbol;
 	private int quantity;
 	private double buyPrice;
+	@ManyToOne
+	@JoinColumn(name = "portfolioId")
 	private Portfolio portfolio;
 	
 	
@@ -16,19 +27,19 @@ public class Holding {
 		super();
 	}
 	
-	public Holding(long id, String stockSymbol, int quantity, double buyPrice, Portfolio portfolio) {
+	public Holding(long holdingId, String stockSymbol, int quantity, double buyPrice, Portfolio portfolio) {
 		super();
-		this.id = id;
+		this.holdingId = holdingId;
 		this.stockSymbol = stockSymbol;
 		this.quantity = quantity;
 		this.buyPrice = buyPrice;
 		this.portfolio = portfolio;
 	}
-	public long getId() {
-		return id;
+	public long getHoldingId() {
+		return holdingId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setHoldingId(long holdingId) {
+		this.holdingId = holdingId;
 	}
 	public String getStockSymbol() {
 		return stockSymbol;
@@ -57,7 +68,7 @@ public class Holding {
 
 	@Override
 	public String toString() {
-		return "Holding [id=" + id + ", stockSymbol=" + stockSymbol + ", quantity=" + quantity + ", buyPrice="
+		return "Holding [holdingId=" + holdingId + ", stockSymbol=" + stockSymbol + ", quantity=" + quantity + ", buyPrice="
 				+ buyPrice + ", portfolio=" + portfolio + "]";
 	}
 
