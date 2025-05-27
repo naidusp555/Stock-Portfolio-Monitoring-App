@@ -1,9 +1,13 @@
 package com.bridgelabz.stockportfoliomonitoringapp.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import com.bridgelabz.stockportfoliomonitoringapp.entity.Holding;
 
-
-public interface HoldingRepository extends JpaRepository<Holding,Integer>{
-
+@Repository
+public interface HoldingRepository extends JpaRepository<Holding, Long> {
+    List<Holding> findByPortfolioId(Long portfolioId);
 }
