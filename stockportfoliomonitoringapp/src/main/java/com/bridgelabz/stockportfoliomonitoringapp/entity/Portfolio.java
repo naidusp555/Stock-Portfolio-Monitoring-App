@@ -20,7 +20,7 @@ public class Portfolio {
 	private long id;
 
 	private String name;
-	@OneToOne(mappedBy = "portfolios")
+	@OneToOne
 	private User user;
 	@OneToMany
 	private List<Holding> holdings;
