@@ -2,10 +2,11 @@ package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
 import java.util.List;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class User {
-	
+	@Id
 	private long id;
 	private String username;
 	private String email;
@@ -14,7 +15,7 @@ public class User {
 	private List<Portfolio> portfolios;
 	
 	
-	public User() {
+	public User(String email, String password) {
 		super();
 	}
 
@@ -27,7 +28,11 @@ public class User {
 		this.role = role;
 		this.portfolios = portfolios;
 	}
-	
+
+	public User() {
+
+	}
+
 	public long getId() {
 		return id;
 	}

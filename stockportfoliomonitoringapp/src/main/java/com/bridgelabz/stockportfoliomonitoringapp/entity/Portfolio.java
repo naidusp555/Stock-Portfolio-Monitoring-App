@@ -2,10 +2,12 @@ package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
 import java.util.List;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Portfolio {
-	
+
+	@Id
 	private long id;
 	private String name;
 	private User user;

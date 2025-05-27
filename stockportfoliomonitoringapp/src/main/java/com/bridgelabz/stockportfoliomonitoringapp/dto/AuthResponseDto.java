@@ -2,14 +2,14 @@ package com.bridgelabz.stockportfoliomonitoringapp.dto;
 
 public class AuthResponseDto {
 	
-	
+	private String message;
 	private String token;
     private String username;
     private String email;
     private String role;
     
     
-	public AuthResponseDto() {
+	public AuthResponseDto(String userRegisteredSuccessfully) {
 		super();
 	}
 	
@@ -21,8 +21,8 @@ public class AuthResponseDto {
 		this.email = email;
 		this.role = role;
 	}
-	
-	
+
+
 	public String getToken() {
 		return token;
 	}

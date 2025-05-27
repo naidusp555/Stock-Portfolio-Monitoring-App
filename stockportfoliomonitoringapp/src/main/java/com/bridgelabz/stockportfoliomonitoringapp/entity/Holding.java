@@ -1,10 +1,12 @@
 package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Holding {
-	
+
+	@Id
 	private long id;
 	private String stockSymbol;
 	private int quantity;
