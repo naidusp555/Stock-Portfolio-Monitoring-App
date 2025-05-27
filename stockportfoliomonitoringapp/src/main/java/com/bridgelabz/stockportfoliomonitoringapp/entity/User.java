@@ -2,25 +2,38 @@ package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
 import java.util.List;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class User {
 	
-	private long id;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long userId;
 	private String username;
 	private String email;
 	private String password;
 	private String role;
-	private List<Portfolio> portfolios;
+	
+	@OneToOne
+	@JoinColumn(name = "portfolio_id")
+	private Portfolio portfolios;
 	
 	
 	public User() {
 		super();
 	}
 
-	public User(long id, String username, String email, String password, String role, List<Portfolio> portfolios) {
+	public User(long userId, String username, String email, String password, String role, Portfolio portfolios) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -28,11 +41,11 @@ public class User {
 		this.portfolios = portfolios;
 	}
 	
-	public long getId() {
-		return id;
+	public long getUserId() {
+		return userId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 	public String getUsername() {
 		return username;
@@ -58,16 +71,16 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public List<Portfolio> getPortfolios() {
+	public Portfolio getPortfolios() {
 		return portfolios;
 	}
-	public void setPortfolios(List<Portfolio> portfolios) {
+	public void setPortfolios(Portfolio portfolios) {
 		this.portfolios = portfolios;
 	}
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", role="
+		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password + ", role="
 				+ role + ", portfolios=" + portfolios + "]";
 	}
 
