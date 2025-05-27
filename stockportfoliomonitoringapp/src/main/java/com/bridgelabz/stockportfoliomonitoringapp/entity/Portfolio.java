@@ -2,15 +2,28 @@ package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
 import java.util.List;
 import jakarta.persistence.Entity;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+
 @Entity
+@Table(name = "portfolio")
 public class Portfolio {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
 	private String name;
+	@OneToOne
 	private User user;
+	@OneToMany
 	private List<Holding> holdings;
 	
 	
@@ -18,18 +31,18 @@ public class Portfolio {
 		super();
 	}
 	
-	public Portfolio(long id, String name, User user, List<Holding> holdings) {
+	public Portfolio(long portfolioId, String name, User user, List<Holding> holdings) {
 		super();
-		this.id = id;
+		this.portfolioId = portfolioId;
 		this.name = name;
 		this.user = user;
 		this.holdings = holdings;
 	}
-	public long getId() {
-		return id;
+	public long getPortfolioId() {
+		return portfolioId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setPortfolioId(long portfolioId) {
+		this.portfolioId = portfolioId;
 	}
 	public String getName() {
 		return name;
@@ -52,6 +65,6 @@ public class Portfolio {
 	
 	@Override
 	public String toString() {
-		return "Portfolio [id=" + id + ", name=" + name + ", user=" + user + ", holdings=" + holdings + "]";
+		return "Portfolio [portfolioId=" + portfolioId + ", name=" + name + ", user=" + user + ", holdings=" + holdings + "]";
 	}
 }
