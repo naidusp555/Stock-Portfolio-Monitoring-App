@@ -17,7 +17,7 @@ public class Portfolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long portfolioId;
 	private String name;
-	@OneToOne(mappedBy = "portfolios")
+	@OneToOne
 	private User user;
 	@OneToMany
 	private List<Holding> holdings;
