@@ -1,5 +1,12 @@
 package com.bridgelabz.stockportfoliomonitoringapp.serviceimpl;
 
+
+
+import java.util.Optional;
+
+
+
+
 import com.bridgelabz.stockportfoliomonitoringapp.dto.HoldingResponseDto;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.Holding;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
@@ -38,4 +45,27 @@ public class HoldingServiceImpl implements HoldingService {
 
         return response;
     }
+  
+    @Override
+    public Holding updateHolding(Long id, Holding updatedData) {
+        Optional<Holding> optionalHolding = holdingRepository.findById(id);
+        if (optionalHolding.isEmpty()) {
+            throw new RuntimeException("Holding not found");
+        }
+
+        Holding olddataHolding = optionalHolding.get();
+
+        int oldQuantity = olddataHolding.getQuantity();
+        int newQuantity = updatedData.getQuantity();
+        double newPrice = updatedData.getBuyPrice();
+
+        int totalQuantity = oldQuantity + newQuantity;
+
+        olddataHolding.setQuantity(totalQuantity);
+        olddataHolding.setBuyPrice(newPrice);
+
+        return holdingRepository.save(olddataHolding);
+    }
+
+
 }
