@@ -1,11 +1,11 @@
 package com.bridgelabz.stockportfoliomonitoringapp.dto;
 
-public class HoldingDto {
+public class HoldingResponseDto {
     private String stockSymbol;
 	private int quantity;
     private double buyPrice;
 
-    public HoldingDto(String stockSymbol, int quantity, double buyPrice) {
+    public HoldingResponseDto(String stockSymbol, int quantity, double buyPrice) {
         this.stockSymbol = stockSymbol;
         this.quantity = quantity;
         this.buyPrice = buyPrice;
