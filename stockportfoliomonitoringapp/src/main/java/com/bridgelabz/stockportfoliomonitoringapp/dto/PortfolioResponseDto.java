@@ -38,9 +38,4 @@ public class PortfolioResponseDto {
         this.username = username;
     }
 
-
-
-
-
-
 }

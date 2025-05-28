@@ -1,4 +1,3 @@
-
 package com.bridgelabz.stockportfoliomonitoringapp.repository;
 
 import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
@@ -10,4 +9,3 @@ public interface PortfolioRepository extends JpaRepository<Portfolio,Long> {
     Optional<Portfolio>findById(long portfolioId);
 
 }
-
