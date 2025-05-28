@@ -1,3 +1,4 @@
+
 package com.bridgelabz.stockportfoliomonitoringapp.repository;
 
 import com.bridgelabz.stockportfoliomonitoringapp.entity.User;
