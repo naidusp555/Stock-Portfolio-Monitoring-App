@@ -9,18 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-
 @RequestMapping("/api/portfolios")
 public class PortfolioController {
 
-    @Autowired
-    private PortfolioService portfolioService;
-
-
+   @Autowired PortfolioService portfolioService;
     @PostMapping("/create")
-    public ResponseEntity<PortfolioResponseDto> createPortfolio(@RequestBody PortfolioRequestDto request, @RequestParam long id) {
+    public ResponseEntity<PortfolioResponseDto> createPortfolio(@RequestBody PortfolioRequestDto request, @RequestParam long portfolioId) {
 
-        PortfolioResponseDto response = portfolioService.createPortfolio(request, id);
+        PortfolioResponseDto response = portfolioService.createPortfolio(request, portfolioId);
         return ResponseEntity.ok(response);
     }
 

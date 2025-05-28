@@ -17,28 +17,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class PortfolioServiceImpl implements PortfolioService {
 
-    @Autowired
-    private PortfolioRepository portfolioRepository;
+	@Autowired
+	private PortfolioRepository portfolioRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    // Create Portfolio
-    @Override
-    public PortfolioResponseDto createPortfolio(PortfolioRequestDto request, long id) {
-        //fetching portfolio by id
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+	// Create Portfolio
+	@Override
+	public PortfolioResponseDto createPortfolio(PortfolioRequestDto request, long portfolioId) {
+		//fetching portfolio by id
+		Portfolio portfolio = portfolioRepository.findById(portfolioId)
+			    .orElseThrow(() -> new RuntimeException("Portfolio not found"));
 
-        Portfolio portfolio = new Portfolio();
-        portfolio.setName(request.getName());
-        portfolio.setUser(user);
+			User user = portfolio.getUser(); // if bi-directional mapping exists
 
-        Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+	
+		portfolio.setName(request.getName());
+		portfolio.setUser(user);
 
-        return new PortfolioResponseDto(
-                savedPortfolio.getId(),
-                savedPortfolio.getName(),
-                user.getUsername()
-        );
-    }
+		Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+
+		return new PortfolioResponseDto(
+				savedPortfolio.getPortfolioId(),
+				savedPortfolio.getName(),
+				user.getUsername()
+				);
+	}
+}
+
+
 

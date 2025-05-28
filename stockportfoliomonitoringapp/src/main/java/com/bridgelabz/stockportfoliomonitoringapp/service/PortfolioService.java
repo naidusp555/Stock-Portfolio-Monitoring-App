@@ -5,6 +5,6 @@ import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioRequestDto;
 import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioResponseDto;
 
 public interface PortfolioService {
-    PortfolioResponseDto createPortfolio(PortfolioRequestDto request, long id);
+   public  PortfolioResponseDto createPortfolio(PortfolioRequestDto request, long portfolioId);
 
 }
