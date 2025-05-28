@@ -1,5 +1,5 @@
-package com.bridgelabz.stockportfoliomonitoringapp.exception;
-
-public class UnauthorizedException {
-
-}
+//package com.bridgelabz.stockportfoliomonitoringapp.exception;
+//
+//public class UnauthorizedException {
+//
+//}
