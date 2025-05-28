@@ -26,9 +26,9 @@ public class PortfolioController {
     }
     
     @PostMapping("/create")
-    public ResponseEntity<PortfolioResponseDto> createPortfolio(@RequestBody PortfolioRequestDto request, @RequestParam long id) {
+    public ResponseEntity<PortfolioResponseDto> createPortfolio(@RequestBody PortfolioRequestDto request, @RequestParam long portfolioid) {
 
-        PortfolioResponseDto response = portfolioService.createPortfolio(request, id);
+        PortfolioResponseDto response = portfolioService.createPortfolio(request, portfolioid);
         return ResponseEntity.ok(response);
     }
 }

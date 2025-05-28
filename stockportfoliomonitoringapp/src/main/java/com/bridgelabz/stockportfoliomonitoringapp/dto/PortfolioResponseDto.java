@@ -1,25 +1,25 @@
 package com.bridgelabz.stockportfoliomonitoringapp.dto;
 
 public class PortfolioResponseDto {
-    private long id;
+    private long portfolioId;
     private String username;
     private String name;
 
 
     public PortfolioResponseDto(){}
 
-    public PortfolioResponseDto(long id, String name, String username) {
-        this.id = id;
+    public PortfolioResponseDto(long portfolioId, String name, String username) {
+        this.portfolioId = portfolioId;
         this.name = name;
         this.username = username;
     }
 
-    public long getId() {
-        return id;
+    public long getPortfolioId() {
+        return portfolioId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPortfolioId(long portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
     public String getName() {

@@ -1,15 +1,11 @@
-
-
 package com.bridgelabz.stockportfoliomonitoringapp.repository;
+
+import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
-
-
-public interface PortfolioRepository extends JpaRepository<Portfolio,Integer>{
-
-	Optional<Portfolio> findById(Long portfolioId);
-	Optional<Portfolio> findByUserId(long id);
+public interface PortfolioRepository extends JpaRepository<Portfolio,Long> {
+    Optional<Portfolio>findById(long portfolioId);
 
 }
