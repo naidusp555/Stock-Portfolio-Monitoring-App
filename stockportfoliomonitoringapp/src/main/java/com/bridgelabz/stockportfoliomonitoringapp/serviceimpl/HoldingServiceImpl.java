@@ -24,6 +24,17 @@ public class HoldingServiceImpl implements HoldingService {
 
     @Autowired
     private HoldingRepository holdingRepository;
+    
+
+
+	@Override
+	public String deleteHoldingById(long id) {
+		if(!holdingRepository.existsById(id)){
+			return "Holding not found.";
+		}
+		holdingRepository.deleteById(id);
+		return "Holding deleted successfully.";
+	}
 
     @Override
     public HoldingResponseDto addHolding(Long portfolioId, String stockSymbol, int quantity, double buyPrice) {
