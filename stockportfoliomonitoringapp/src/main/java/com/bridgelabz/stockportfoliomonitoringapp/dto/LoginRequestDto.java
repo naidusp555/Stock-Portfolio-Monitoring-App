@@ -1,44 +1,39 @@
 package com.bridgelabz.stockportfoliomonitoringapp.dto;
 
-public class AuthRequestDto {
+import jakarta.validation.constraints.Email;
+
+public class LoginRequestDto {
+	
+	@Email(message = "Invalid email format")
 	private String email;
 	private String password;
 	
 	
-	
-	public AuthRequestDto() {
+	public LoginRequestDto() {
 		super();
 	}
 
-
-	public AuthRequestDto(String email, String password) {
+	public LoginRequestDto(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-	
 	
 
 }

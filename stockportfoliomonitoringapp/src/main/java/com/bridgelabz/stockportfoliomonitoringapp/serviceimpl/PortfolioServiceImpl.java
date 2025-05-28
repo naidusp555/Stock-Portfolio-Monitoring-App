@@ -1,6 +1,7 @@
 package com.bridgelabz.stockportfoliomonitoringapp.serviceimpl;
 
 
+
 import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioRequestDto;
 import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioResponseDto;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
@@ -41,4 +42,3 @@ public class PortfolioServiceImpl implements PortfolioService {
         );
     }
 
-}

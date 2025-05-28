@@ -2,6 +2,7 @@ package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
 import java.util.List;
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,8 +17,8 @@ import jakarta.persistence.Table;
 public class Portfolio {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long portfolioId;
 
 	private String name;
 	@OneToOne

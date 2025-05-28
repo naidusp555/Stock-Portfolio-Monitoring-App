@@ -1,5 +1,6 @@
 package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,9 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name = "holding")
 public class Holding {
+
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
