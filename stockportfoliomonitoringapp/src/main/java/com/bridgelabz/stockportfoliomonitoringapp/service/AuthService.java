@@ -1,5 +1,5 @@
-package com.bridgelabz.stockportfoliomonitoringapp.service;
-
-public interface AuthService {
-
-}
+//package com.bridgelabz.stockportfoliomonitoringapp.service;
+//
+//public interface AuthService {
+//
+//}

@@ -1,7 +1,8 @@
 package com.bridgelabz.stockportfoliomonitoringapp.serviceimpl;
 
 
-import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioDto;
+import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioRequestDto;
+import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioResponseDto;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.User;
 import com.bridgelabz.stockportfoliomonitoringapp.repository.PortfolioRepository;
@@ -10,7 +11,6 @@ import com.bridgelabz.stockportfoliomonitoringapp.service.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 
 @Service
@@ -24,17 +24,21 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     // Create Portfolio
     @Override
-    public Portfolio createPortfolio(PortfolioDto portfolioDto, Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+    public PortfolioResponseDto createPortfolio(PortfolioRequestDto request, long id) {
+        //fetching portfolio by id
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
 
         Portfolio portfolio = new Portfolio();
-        portfolio.setName(portfolioDto.getName());
+        portfolio.setName(request.getName());
         portfolio.setUser(user);
 
-        return portfolioRepository.save(portfolio);
+        Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+
+        return new PortfolioResponseDto(
+                savedPortfolio.getId(),
+                savedPortfolio.getName(),
+                user.getUsername()
+        );
     }
 
-    @Override
-    public List<Portfolio> getPortfoliosByUser(Long userId) {
-        return portfolioRepository.findByUserId(userId);
-    }}
+}
