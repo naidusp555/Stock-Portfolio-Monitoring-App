@@ -18,7 +18,7 @@ public class Portfolio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long portfolioId;
 
 	private String name;
 	@OneToOne

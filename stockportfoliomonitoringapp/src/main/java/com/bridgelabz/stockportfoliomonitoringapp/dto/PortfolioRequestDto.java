@@ -1,6 +1,6 @@
 package com.bridgelabz.stockportfoliomonitoringapp.dto;
 
-public class PortfolioDto {
+public class PortfolioRequestDto {
     private String name;
 
     public String getName() {
