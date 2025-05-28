@@ -21,7 +21,7 @@ public class Holding {
 	private int quantity;
 	private double buyPrice;
 	@ManyToOne
-	@JoinColumn(name = "portfolioId")
+	@JoinColumn(name = "portfolio_id")
 	private Portfolio portfolio;
 	
 	

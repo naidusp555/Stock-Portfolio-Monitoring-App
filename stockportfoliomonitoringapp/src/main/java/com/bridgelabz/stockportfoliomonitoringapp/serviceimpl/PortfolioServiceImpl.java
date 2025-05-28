@@ -19,7 +19,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public List<HoldingResponseDto> getHoldingsByPortfolioId(Long portfolioId) {
-        List<Holding> holdings = holdingRepository.findByPortfolioId(portfolioId);
+        List<Holding> holdings = holdingRepository.findHoldingByPortfolioId(portfolioId);
         return holdings.stream()
                 .map(h -> new HoldingResponseDto(h.getStockSymbol(), h.getQuantity(), h.getBuyPrice()))
                 .collect(Collectors.toList());
