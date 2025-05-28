@@ -37,6 +37,10 @@ public class Portfolio {
 		this.user = user;
 		this.holdings = holdings;
 	}
+	
+	public long getId() {
+		return id;
+	}
 	public long getPortfolioId() {
 		return id;
 	}

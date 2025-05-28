@@ -1,4 +1,5 @@
 
+
 package com.bridgelabz.stockportfoliomonitoringapp.repository;
 import java.util.Optional;
 
@@ -9,5 +10,6 @@ import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
 public interface PortfolioRepository extends JpaRepository<Portfolio,Integer>{
 
 	Optional<Portfolio> findById(Long portfolioId);
+	Optional<Portfolio> findByUserId(long id);
 
 }
