@@ -7,3 +7,4 @@ import com.bridgelabz.stockportfoliomonitoringapp.dto.HoldingResponseDto;
 public interface PortfolioService {
     List<HoldingResponseDto> getHoldingsByPortfolioId(Long portfolioId);
 }
+

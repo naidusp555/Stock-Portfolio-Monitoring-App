@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "holding")
 public class Holding {
-
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long holdingId;
