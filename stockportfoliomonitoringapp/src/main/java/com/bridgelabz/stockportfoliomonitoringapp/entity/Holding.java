@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "holding")
 public class Holding {
-
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +21,7 @@ public class Holding {
 	private int quantity;
 	private double buyPrice;
 	@ManyToOne
-	@JoinColumn(name = "portfolioId")
+	@JoinColumn(name = "portfolio_id")
 	private Portfolio portfolio;
 	
 	
@@ -74,5 +73,4 @@ public class Holding {
 		return "Holding [holdingId=" + holdingId + ", stockSymbol=" + stockSymbol + ", quantity=" + quantity + ", buyPrice="
 				+ buyPrice + ", portfolio=" + portfolio + "]";
 	}
-
 }
