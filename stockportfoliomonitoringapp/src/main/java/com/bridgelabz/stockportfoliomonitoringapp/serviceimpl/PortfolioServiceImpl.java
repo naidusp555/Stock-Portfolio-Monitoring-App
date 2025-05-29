@@ -55,12 +55,10 @@ public class PortfolioServiceImpl implements PortfolioService {
         // Create and save portfolio
         Portfolio portfolio = new Portfolio();
         portfolio.setName(request.getName());
-        portfolio.setUser(user);
-        portfolio = portfolioRepository.save(portfolio); // generates portfolioId
-
-        // Update user with generated portfolio
+        portfolio.setUser(user);         // sets user in Portfolio ✅
         user.setPortfolio(portfolio);
-        userRepository.save(user); // updates user table with portfolioId
+        portfolio = portfolioRepository.save(portfolio); // generates portfolioId
+        user = userRepository.save(user); // updates user table with portfolioId
 
         // Prepare response DTO
         PortfolioResponseDto responseDto = new PortfolioResponseDto();
