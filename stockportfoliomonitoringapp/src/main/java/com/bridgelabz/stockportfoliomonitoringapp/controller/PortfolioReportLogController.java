@@ -1,10 +1,14 @@
 package com.bridgelabz.stockportfoliomonitoringapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bridgelabz.stockportfoliomonitoringapp.repository.PortfolioReportLogRepository;
+import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioReportLogResponseDto;
+import com.bridgelabz.stockportfoliomonitoringapp.service.PortfolioReportLogService;
 
 
 @RestController
@@ -12,9 +16,14 @@ import com.bridgelabz.stockportfoliomonitoringapp.repository.PortfolioReportLogR
 public class PortfolioReportLogController {
 	
 	@Autowired
-	PortfolioReportLogRepository portfolioReportLogRepository;
+	PortfolioReportLogService portfolioReportLogService;
 	
 	
+	
+	@GetMapping("/portfolio-summary/{portfolioId}")
+	public ResponseEntity<PortfolioReportLogResponseDto> getReport(@PathVariable Long portfolioId){
+		return ResponseEntity.ok(portfolioReportLogService.getReport(portfolioId));
+	}
 	
 
 }

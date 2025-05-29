@@ -1,4 +1,3 @@
-
 package com.bridgelabz.stockportfoliomonitoringapp.controller;
 
 import java.util.List;
@@ -34,6 +33,7 @@ public class PortfolioController {
     @PostMapping("/{userId}")
     public ResponseEntity<PortfolioResponseDto> createPortfolio(@RequestBody PortfolioRequestDto request, @PathVariable long userId){
 
+
         PortfolioResponseDto portfolioResponseDto = portfolioService.createPortfolio(request, userId);
         return new ResponseEntity<>(portfolioResponseDto, HttpStatus.OK);
     }
@@ -43,5 +43,6 @@ public class PortfolioController {
         List<HoldingResponseDto> holdings = portfolioService.getHoldingsByPortfolioId(portfolioId);
         return ResponseEntity.ok(holdings);
     }
+
 
 }
