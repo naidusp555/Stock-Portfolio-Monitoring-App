@@ -3,6 +3,8 @@ package com.bridgelabz.stockportfoliomonitoringapp.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 
 public class RegisterRequestDto {
 
@@ -13,9 +15,11 @@ public class RegisterRequestDto {
     @Email(message = "Invalid email format")
     private String email;
 
- 
+
+    @Size(min = 5, message = "Password must be at least 5 characters")
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9@_.]{5,}$", message = "Password Should start with alphabets and it should have ")
     @NotBlank(message = "Password is required")
+
     private String password;
 
     public RegisterRequestDto() {
