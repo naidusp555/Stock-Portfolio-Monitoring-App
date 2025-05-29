@@ -17,7 +17,9 @@ import com.bridgelabz.stockportfoliomonitoringapp.exception.EmailAlreadyExistsEx
 import com.bridgelabz.stockportfoliomonitoringapp.repository.UserRepository;
 import com.bridgelabz.stockportfoliomonitoringapp.service.AuthService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 
 
@@ -34,6 +36,14 @@ public  class AuthServiceImpl implements AuthService {
 			throw new EmailAlreadyExistsException("Email already in use");//U
 		}
 		
+		//Password Checking
+		String pass = request.getPassword();
+		String regex = "^[a-zA-Z][a-zA-Z0-9@_.]{5,}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(pass);
+		if (!matcher.matches()) {
+		    throw new IllegalArgumentException("Password does not follow the required format.");
+		}
 		
 		// Create new user
 		User user = new User();
@@ -41,9 +51,9 @@ public  class AuthServiceImpl implements AuthService {
 		user.setEmail(request.getEmail());
 		user.setPassword(request.getPassword()); // No encoding
 		
-//		if (user.getEmail() == null || user.getEmail().isBlank()) {
-//		    throw new IllegalArgumentException("Email must not be null or empty");
-//		}
+		if (user.getEmail() == null || user.getEmail().isBlank()) {
+		    throw new IllegalArgumentException("Email must not be null or empty");
+		}
 		
 		// Save user to database
 		userRepository.save(user);
@@ -53,8 +63,8 @@ public  class AuthServiceImpl implements AuthService {
 	    response.setMessage("User registered successfully");
 	    response.setUsername(request.getUsername());
 	    response.setEmail(request.getEmail());
-//	    response.setRole(null);
-//	    response.setToken(null);
+	    response.setRole(null);
+	    response.setToken(null);
 	    return response;
 	}
 	
@@ -77,6 +87,7 @@ public  class AuthServiceImpl implements AuthService {
 		
 		//create response
 		LoginResponseDto response = new LoginResponseDto();
+		response.setMessage("You have successfully logged in.");
 		response.setUserName(user.get().getUsername());
 		response.setEmail(user.get().getEmail());
 		response.setToken(token);

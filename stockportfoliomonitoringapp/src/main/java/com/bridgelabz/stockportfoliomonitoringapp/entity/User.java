@@ -1,11 +1,14 @@
-package com.bridgelabz.stockportfoliomonitoringapp.entity;
+	package com.bridgelabz.stockportfoliomonitoringapp.entity;
 
+import java.util.List;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -22,23 +25,26 @@ public class User {
 	private String password;
 	private String role;
 	
-	@OneToOne
-	@JoinColumn(name = "portfolio_id")
-	private Portfolio portfolios;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "portfolio_id", referencedColumnName = "portfolioId")
+	private Portfolio portfolio;
 	
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Alert> alert;
 	
 	public User() {
 		super();
 	}
 
-	public User(long userId, String username, String email, String password, String role, Portfolio portfolios) {
+	public User(long userId, String username, String email, String password, String role, Portfolio portfolio) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.portfolios = portfolios;
+		this.portfolio = portfolio;
 	}
 
 	public long getUserId() {
@@ -71,17 +77,17 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public Portfolio getPortfolios() {
-		return portfolios;
+	public Portfolio getPortfolio() {
+		return portfolio;
 	}
-	public void setPortfolios(Portfolio portfolios) {
-		this.portfolios = portfolios;
+	public void setPortfolio(Portfolio portfolio) {
+		this.portfolio = portfolio;
 	}
 	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password + ", role="
-				+ role + ", portfolios=" + portfolios + "]";
+				+ role + ", portfolios=" + portfolio + "]";
 	}
 
 }
