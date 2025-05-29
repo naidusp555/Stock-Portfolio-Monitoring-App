@@ -1,9 +1,6 @@
 package com.bridgelabz.stockportfoliomonitoringapp.dto;
 
-import jakarta.validation.constraints.NotBlank;
-
 public class PortfolioRequestDto {
-    @NotBlank(message = "Portfolio name is mandatory")
     private String name;
     public PortfolioRequestDto(){
 

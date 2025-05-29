@@ -24,14 +24,14 @@ public class Portfolio {
 	private User user;
 	@OneToMany(mappedBy = "portfolio")
 	private List<Holding> holdings;
-	
+
 	@OneToMany(mappedBy = "portfolio")
 	private List<PortfolioReportLog> portfolioReportLog;
-	
+
 	public Portfolio() {
 		super();
 	}
-	
+
 	public Portfolio(long portfolioId, String name, User user, List<Holding> holdings) {
 		super();
 		this.portfolioId = portfolioId;
@@ -39,8 +39,8 @@ public class Portfolio {
 		this.user = user;
 		this.holdings = holdings;
 	}
-	
-	
+
+
 	public long getPortfolioId() {
 		return portfolioId;
 	}
@@ -65,7 +65,7 @@ public class Portfolio {
 	public void setHoldings(List<Holding> holdings) {
 		this.holdings = holdings;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Portfolio [portfolioId=" + portfolioId + ", name=" + name + ", user=" + user + ", holdings=" + holdings + "]";
