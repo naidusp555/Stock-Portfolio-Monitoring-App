@@ -36,14 +36,6 @@ public  class AuthServiceImpl implements AuthService {
 			throw new EmailAlreadyExistsException("Email already in use");//U
 		}
 		
-		//Password Checking
-		String pass = request.getPassword();
-		String regex = "^[a-zA-Z][a-zA-Z0-9@_.]{5,}$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(pass);
-		if (!matcher.matches()) {
-		    throw new IllegalArgumentException("Password does not follow the required format.");
-		}
 		
 		// Create new user
 		User user = new User();
@@ -51,9 +43,6 @@ public  class AuthServiceImpl implements AuthService {
 		user.setEmail(request.getEmail());
 		user.setPassword(request.getPassword()); // No encoding
 		
-		if (user.getEmail() == null || user.getEmail().isBlank()) {
-		    throw new IllegalArgumentException("Email must not be null or empty");
-		}
 		
 		// Save user to database
 		userRepository.save(user);
