@@ -78,7 +78,5 @@ public class PortfolioServiceImpl implements PortfolioService {
                 .collect(Collectors.toList());
     }
     
-
  	
-
 }    
