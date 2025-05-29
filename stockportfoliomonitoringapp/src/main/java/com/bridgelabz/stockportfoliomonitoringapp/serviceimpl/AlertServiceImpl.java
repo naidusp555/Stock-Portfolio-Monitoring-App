@@ -32,6 +32,10 @@ public class AlertServiceImpl implements AlertService{
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	MailServiceImpl mailServiceImpl;
+	
+	//set alert
 	public AlertPostResponseDto setAlert(long userId, AlertPostRequestDto alertPostRequestDto) {
 		
 		Optional<User> user = userRepository.findById(userId);
@@ -75,6 +79,7 @@ public class AlertServiceImpl implements AlertService{
 	    return alertGetResponseDtoList;
 	}
 	
+	//update alert
 	public Alert updateAlert(long alertId, AlertUpdateRequestDto alertUpdateRequestDto) {
 		Optional<Alert> optionalAlert = alertRepository.findById(alertId);
 		if (optionalAlert.isEmpty()) {
@@ -95,6 +100,9 @@ public class AlertServiceImpl implements AlertService{
 		
 		return updatedAlert;
 	}
+	
+	//Sending alertMail to any User
+	
 
 
 }

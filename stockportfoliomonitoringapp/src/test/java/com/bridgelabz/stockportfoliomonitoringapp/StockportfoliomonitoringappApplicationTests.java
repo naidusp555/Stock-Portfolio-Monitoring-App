@@ -28,35 +28,22 @@ import com.bridgelabz.stockportfoliomonitoringapp.service.HoldingService;
 
 
 
-
-
-import com.bridgelabz.stockportfoliomonitoringapp.controller.HoldingController;
-import com.bridgelabz.stockportfoliomonitoringapp.service.HoldingService;
 import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioRequestDto;
 import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioResponseDto;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.Portfolio;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.User;
 import com.bridgelabz.stockportfoliomonitoringapp.repository.PortfolioRepository;
-import com.bridgelabz.stockportfoliomonitoringapp.repository.UserRepository;
 import com.bridgelabz.stockportfoliomonitoringapp.serviceimpl.PortfolioServiceImpl;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.ArgumentMatchers.any;
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 class StockportfoliomonitoringappApplicationTests {
@@ -121,110 +108,106 @@ class StockportfoliomonitoringappApplicationTests {
 	@InjectMocks
 	private AuthController authController;
 
-	
+
 	@Test
 	public void UserRegistrationtest() {
-	    RegisterRequestDto requestDto = new RegisterRequestDto();
-	    requestDto.setUsername("shadow");
-	    requestDto.setEmail("shadow@example.com");
-	    requestDto.setPassword("Strong@123");
+		RegisterRequestDto requestDto = new RegisterRequestDto();
+		requestDto.setUsername("shadow");
+		requestDto.setEmail("shadow@example.com");
+		requestDto.setPassword("Strong@123");
 
-	    //long userId = 101L;
+		//long userId = 101L;
 
-	    RegisterResponseDto mockResponse = new RegisterResponseDto();
-	    mockResponse.setUsername("shadow");
-	    mockResponse.setMessage("User registered successfully");
+		RegisterResponseDto mockResponse = new RegisterResponseDto();
+		mockResponse.setUsername("shadow");
+		mockResponse.setMessage("User registered successfully");
 
-	    when(service.registerUser(requestDto)).thenReturn(mockResponse);
+		when(service.registerUser(requestDto)).thenReturn(mockResponse);
 
-	    ResponseEntity<RegisterResponseDto> response = authController.userRegisteration(requestDto);
+		ResponseEntity<RegisterResponseDto> response = authController.userRegisteration(requestDto);
 
-	    assertEquals("shadow", response.getBody().getUsername());
-	    assertEquals("User registered successfully", response.getBody().getMessage());
+		assertEquals("shadow", response.getBody().getUsername());
+		assertEquals("User registered successfully", response.getBody().getMessage());
 	}
 
-	
+
 	@Test
 	public void userLoginTest() {
 		LoginRequestDto requestDto = new LoginRequestDto();
 		requestDto.setEmail("messi555@gmail.com");
 		requestDto.setPassword("goat@123");
-		
+
 		LoginResponseDto responseDto = new LoginResponseDto();
 		responseDto.setEmail("messi555@gmail.com");
 		responseDto.setToken("fhuen");
 		responseDto.setMessage("Logged in");
-		
+
 		when(service.loginUser(requestDto)).thenReturn(responseDto);
-		
+
 		ResponseEntity<LoginResponseDto> responseEntity = authController.userLogin(requestDto);
-		
+
 		assertEquals("messi555@gmail.com", responseEntity.getBody().getEmail());
 		assertEquals("fhuen", responseEntity.getBody().getToken());
-		
+	}
 
-	public void testDeleteHolding_NotFound() {
-		Long holdingId = 999L;
-		String errorMessage = "Holding not found.";
+		public void testDeleteHolding_NotFound() {
+			Long holdingId = 999L;
+			String errorMessage = "Holding not found.";
 
-		when(holdingService.deleteHoldingById(holdingId)).thenReturn(errorMessage);
+			when(holdingService.deleteHoldingById(holdingId)).thenReturn(errorMessage);
 
-		ResponseEntity<String> response = holdingController.deleteHolding(holdingId);
+			ResponseEntity<String> response = holdingController.deleteHolding(holdingId);
 
-		assertEquals(404, response.getStatusCodeValue());
-		assertEquals(errorMessage, response.getBody());
+			assertEquals(404, response.getStatusCodeValue());
+			assertEquals(errorMessage, response.getBody());
+		}
+		public void getAllPortfoliosTest(){
+			long userid=1;
+			Portfolio portfolio = new Portfolio();
+			portfolio.setPortfolioId(10);
+			portfolio.setName("Mohanraj");
 
-	public void getAllPortfoliosTest(){
-		long userid=1;
-		Portfolio portfolio = new Portfolio();
-		portfolio.setPortfolioId(10);
-		portfolio.setName("Mohanraj");
+			when(portfolioRepository.findByUserUserId(userid)).thenReturn(Optional.of(portfolio));
 
-		when(portfolioRepository.findByUserUserId(userid)).thenReturn(Optional.of(portfolio));
+			PortfolioResponseDto response = portfolioServiceImpl.getAllPortfolios(userid);
 
-		PortfolioResponseDto response = portfolioServiceImpl.getAllPortfolios(userid);
+			assertEquals(10,response.getPortfolioId());
+			assertEquals("Mohanraj",response.getName());
 
-		assertEquals(10,response.getPortfolioId());
-		assertEquals("Mohanraj",response.getName());
+		}
+
+
+
+		@BeforeEach
+		public void setup() {
+			MockitoAnnotations.openMocks(this);
+		}
+
+		@Test
+		public void testUpdateHolding() {
+			Long id = 1L;
+
+
+			HoldingRequestDto requestDto = new HoldingRequestDto();
+			requestDto.setQuantity(20);
+			requestDto.setBuyPrice(155.50);
+
+			HoldingResponseDto mockResponse = new HoldingResponseDto();
+			mockResponse.setStockSymbol("AAPL");
+			mockResponse.setQuantity(20);
+			mockResponse.setBuyPrice(155.50);
+
+			when(holdingService.updateHolding(id, requestDto)).thenReturn(mockResponse);
+
+			ResponseEntity<HoldingResponseDto> response = holdingController.updateHolding(id, requestDto);
+
+			assertEquals("AAPL", response.getBody().getStockSymbol());
+			assertEquals(20, response.getBody().getQuantity());
+			assertEquals(155.50, response.getBody().getBuyPrice());
+		}
+
 
 	}
-	
-	@Mock
-	private HoldingService holdingService;
-	
-	@InjectMocks
-	private HoldingController holdingController;
-	
-	 @BeforeEach
-	    public void setup() {
-	        MockitoAnnotations.openMocks(this);
-	    }
-
-	    @Test
-	    public void testUpdateHolding() {
-	        Long id = 1L;
-
-
-	        HoldingRequestDto requestDto = new HoldingRequestDto();
-	        requestDto.setQuantity(20);
-	        requestDto.setBuyPrice(155.50);
-
-	        HoldingResponseDto mockResponse = new HoldingResponseDto();
-	        mockResponse.setStockSymbol("AAPL");
-	        mockResponse.setQuantity(20);
-	        mockResponse.setBuyPrice(155.50);
-
-	        when(holdingService.updateHolding(id, requestDto)).thenReturn(mockResponse);
-
-	        ResponseEntity<HoldingResponseDto> response = holdingController.updateHolding(id, requestDto);
-
-	        assertEquals("AAPL", response.getBody().getStockSymbol());
-	        assertEquals(20, response.getBody().getQuantity());
-	        assertEquals(155.50, response.getBody().getBuyPrice());
-	    }
-	
-	
-}
 
 
 

@@ -46,5 +46,6 @@ public class AlertController {
 		Alert updatedAlert = alertService.updateAlert(alertId, alertUpdateRequestDto);
 		return new ResponseEntity<>(updatedAlert, HttpStatus.OK);
 	}
+	
 
 }
