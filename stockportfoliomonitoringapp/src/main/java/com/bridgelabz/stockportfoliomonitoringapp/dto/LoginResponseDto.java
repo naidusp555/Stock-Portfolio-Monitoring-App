@@ -2,6 +2,7 @@ package com.bridgelabz.stockportfoliomonitoringapp.dto;
 
 public class LoginResponseDto {
 	
+	private String message;
 	private String token;
 	private String userName;
 	private String email;
@@ -10,11 +11,12 @@ public class LoginResponseDto {
 		super();
 	}
 	
-	public LoginResponseDto(String token, String userName, String email) {
+	public LoginResponseDto(String token, String userName, String email, String message) {
 		super();
 		this.token = token;
 		this.userName = userName;
 		this.email = email;
+		this.message = message;
 	}
 	
 	public String getToken() {
@@ -40,6 +42,16 @@ public class LoginResponseDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
 	
 	
 	

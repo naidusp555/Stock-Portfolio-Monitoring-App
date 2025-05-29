@@ -1,6 +1,7 @@
 package com.bridgelabz.stockportfoliomonitoringapp.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+
 import com.bridgelabz.stockportfoliomonitoringapp.dto.LoginRequestDto;
 import com.bridgelabz.stockportfoliomonitoringapp.dto.LoginResponseDto;
 import com.bridgelabz.stockportfoliomonitoringapp.dto.RegisterRequestDto;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -25,9 +27,6 @@ public class AuthController {
 
     @PostMapping("/auth/register")
     public ResponseEntity<RegisterResponseDto> userRegisteration(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
-        System.out.println("Incoming request: " + registerRequestDto.getUsername() + ", " +
-                registerRequestDto.getEmail() + ", " + registerRequestDto.getPassword());
-
         RegisterResponseDto response = authService.registerUser(registerRequestDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
