@@ -34,9 +34,6 @@ public class HoldingController {
 		return ResponseEntity.ok(result);
 	}
 
-
-
-
 @PostMapping("/add")
 public ResponseEntity<HoldingResponseDto> addHolding(@RequestBody HoldingRequest request) {
 	HoldingResponseDto response = holdingService.addHolding(
