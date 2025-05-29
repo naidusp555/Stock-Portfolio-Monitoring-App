@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -18,13 +18,15 @@ public class Portfolio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "portfolio_id")
-	private long id;
+	private long portfolioId;
 	private String name;
-	@OneToOne
+	@OneToOne(mappedBy = "portfolio")
 	private User user;
-	@OneToMany
+	@OneToMany(mappedBy = "portfolio")
 	private List<Holding> holdings;
+	
+	@OneToMany(mappedBy = "portfolio")
+	private List<PortfolioReportLog> portfolioReportLog;
 	
 	public Portfolio() {
 		super();
@@ -32,20 +34,18 @@ public class Portfolio {
 	
 	public Portfolio(long portfolioId, String name, User user, List<Holding> holdings) {
 		super();
-		this.id = portfolioId;
+		this.portfolioId = portfolioId;
 		this.name = name;
 		this.user = user;
 		this.holdings = holdings;
 	}
 	
-	public long getId() {
-		return id;
-	}
+	
 	public long getPortfolioId() {
-		return id;
+		return portfolioId;
 	}
 	public void setPortfolioId(long portfolioId) {
-		this.id = portfolioId;
+		this.portfolioId = portfolioId;
 	}
 	public String getName() {
 		return name;
@@ -68,6 +68,6 @@ public class Portfolio {
 	
 	@Override
 	public String toString() {
-		return "Portfolio [portfolioId=" + id + ", name=" + name + ", user=" + user + ", holdings=" + holdings + "]";
+		return "Portfolio [portfolioId=" + portfolioId + ", name=" + name + ", user=" + user + ", holdings=" + holdings + "]";
 	}
 }
