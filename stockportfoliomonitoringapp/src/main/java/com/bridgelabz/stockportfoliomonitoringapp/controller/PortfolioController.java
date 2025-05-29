@@ -1,4 +1,3 @@
-
 package com.bridgelabz.stockportfoliomonitoringapp.controller;
 
 import java.util.List;
@@ -18,30 +17,32 @@ import com.bridgelabz.stockportfoliomonitoringapp.service.PortfolioService;
 @RequestMapping("/api/portfolios")
 public class PortfolioController {
 
-	@Autowired
-	private PortfolioService portfolioService;
+    @Autowired
+    private PortfolioService portfolioService;
 
 
-	//Fetch all Portfolios
-	@GetMapping("/{userId}")
-	public ResponseEntity<PortfolioResponseDto> getAllPortfolios(@PathVariable long userId){
+    //Fetch all Portfolios
+    @GetMapping("/{userId}")
+    public ResponseEntity<PortfolioResponseDto> getAllPortfolios(@PathVariable long userId){
 
-		PortfolioResponseDto portfolioResponseDto = portfolioService.getAllPortfolios(userId);
-		return new ResponseEntity<>(portfolioResponseDto, HttpStatus.OK);
+        PortfolioResponseDto portfolioResponseDto = portfolioService.getAllPortfolios(userId);
+        return new ResponseEntity<>(portfolioResponseDto, HttpStatus.OK);
 
-	}
-	//Creat portfolio
-	@PostMapping("/{userId}")
-	public ResponseEntity<PortfolioResponseDto> createPortfolio(@RequestBody PortfolioRequestDto request, @PathVariable long userId){
+    }
+    //Creates portfolio
+    @PostMapping("/{userId}")
+    public ResponseEntity<PortfolioResponseDto> createPortfolio(@RequestBody PortfolioRequestDto request, @PathVariable long userId){
 
-		PortfolioResponseDto portfolioResponseDto = portfolioService.createPortfolio(request, userId);
-		return new ResponseEntity<>(portfolioResponseDto, HttpStatus.OK); 
-	}
-	//Getting holdings
-	@GetMapping("/{id}/holdings")
-	public ResponseEntity<List<HoldingResponseDto>> getHoldingsByPortfolioId(@PathVariable("id") Long portfolioId) {
-		List<HoldingResponseDto> holdings = portfolioService.getHoldingsByPortfolioId(portfolioId);
-		return ResponseEntity.ok(holdings);
-	}
+
+        PortfolioResponseDto portfolioResponseDto = portfolioService.createPortfolio(request, userId);
+        return new ResponseEntity<>(portfolioResponseDto, HttpStatus.OK);
+    }
+    //Getting holdings
+    @GetMapping("/{id}/holdings")
+    public ResponseEntity<List<HoldingResponseDto>> getHoldingsByPortfolioId(@PathVariable("id") Long portfolioId) {
+        List<HoldingResponseDto> holdings = portfolioService.getHoldingsByPortfolioId(portfolioId);
+        return ResponseEntity.ok(holdings);
+    }
+
 
 }

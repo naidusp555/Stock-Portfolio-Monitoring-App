@@ -9,5 +9,5 @@ import com.bridgelabz.stockportfoliomonitoringapp.entity.Holding;
 
 @Repository
 public interface HoldingRepository extends JpaRepository<Holding, Long> {
-	List<Holding> findAllByPortfolioPortfolioId(long portfolioId);
+	List<Holding> findAllByPortfolioPortfolioId(long portfolioId); 
 }
