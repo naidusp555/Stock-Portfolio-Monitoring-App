@@ -36,6 +36,7 @@ public class PortfolioController {
 		PortfolioResponseDto portfolioResponseDto = portfolioService.createPortfolio(request, userId);
 		return new ResponseEntity<>(portfolioResponseDto, HttpStatus.OK); 
 	}
+	
 	//Getting holdings
 	@GetMapping("/{id}/holdings")
 	public ResponseEntity<List<HoldingResponseDto>> getHoldingsByPortfolioId(@PathVariable("id") Long portfolioId) {
