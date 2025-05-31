@@ -9,5 +9,5 @@ import com.bridgelabz.stockportfoliomonitoringapp.entity.Holding;
 import com.bridgelabz.stockportfoliomonitoringapp.entity.PortfolioReportLog;
 @Repository
 public interface PortfolioReportLogRepository extends JpaRepository<PortfolioReportLog, Long> {
-
+	List<PortfolioReportLog> findAllByPortfolioPortfolioId(long portfolioId);
 }

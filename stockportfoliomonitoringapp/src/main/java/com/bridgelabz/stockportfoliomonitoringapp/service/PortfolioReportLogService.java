@@ -4,4 +4,5 @@ import com.bridgelabz.stockportfoliomonitoringapp.dto.PortfolioReportLogResponse
 
 public interface PortfolioReportLogService {
 	PortfolioReportLogResponseDto getReport(Long portfolioId);
+	public String generateReport(Long portfolioId);
 }

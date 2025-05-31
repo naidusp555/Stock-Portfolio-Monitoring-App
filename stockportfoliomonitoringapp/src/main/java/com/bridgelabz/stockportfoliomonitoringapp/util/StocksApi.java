@@ -17,15 +17,15 @@ public class StocksApi {
 	
 	
 //	@Scheduled(fixedDelay = 2000)
-//	void fetchStockPrice() throws Exception {
-//		
-//		HttpRequest request = HttpRequest.newBuilder()
-//			    .uri(URI.create("https://stock.indianapi.in/stock?name=sbin"))
-//			    .header("X-Api-Key", "sk-live-qRr66nuYjV8fb2aizxdo3RW1eXl1KDEw5p9GDrj3")
-//			    .method("GET", HttpRequest.BodyPublishers.noBody())
-//			    .build();
-//			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-//			System.out.println(response.body());
-//	}
+	void fetchStockPrice() throws Exception {
+		
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://stock.indianapi.in/stock?name=sbin"))
+			    .header("X-Api-Key", "sk-live-qRr66nuYjV8fb2aizxdo3RW1eXl1KDEw5p9GDrj3")
+			    .method("GET", HttpRequest.BodyPublishers.noBody())
+			    .build();
+			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			System.out.println(response.body());
+	}
 
 }

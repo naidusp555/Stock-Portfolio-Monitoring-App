@@ -25,5 +25,9 @@ public class PortfolioReportLogController {
 		return ResponseEntity.ok(portfolioReportLogService.getReport(portfolioId));
 	}
 	
+	@GetMapping("/download/pdf/{portfolioId}")
+	public ResponseEntity<String> downloadReport(@PathVariable Long portfolioId){
+		return ResponseEntity.ok(portfolioReportLogService.generateReport(portfolioId));
+	}
 
 }

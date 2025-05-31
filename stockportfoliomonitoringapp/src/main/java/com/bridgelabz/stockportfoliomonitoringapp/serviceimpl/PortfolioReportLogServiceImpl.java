@@ -1,5 +1,8 @@
 package com.bridgelabz.stockportfoliomonitoringapp.serviceimpl;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -47,4 +50,28 @@ public class PortfolioReportLogServiceImpl implements PortfolioReportLogService 
 		return portfolioReportLogResponseDto;
 
 	}
+	
+	public String generateReport(Long portfolioId) {
+	    List<PortfolioReportLog> logs = portfolioReportLogRepository.findAllByPortfolioPortfolioId(portfolioId);
+
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("Report.txt"))) {
+	        writer.write(String.format("%-25s %-15s %-25s %-15s %-12s\n",
+	                "PortfolioReportLogId", "Date", "TotalGainLoss", "TotalValue", "PortfolioId"));
+
+	        for (PortfolioReportLog log : logs) {
+	            writer.write(String.format("%-25d %-15s %-25.15f %-15.2f %-12d\n",
+	                    log.getPortfolioReportLogId(),
+	                    log.getDate().toString(),
+	                    log.getTotalGainLoss(),
+	                    log.getTotalValue(),
+	                    log.getPortfolio().getPortfolioId()));
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return "Failed to generate report.";
+	    }
+
+	    return "Successfully generated TXT report.";
+	}
+
 }

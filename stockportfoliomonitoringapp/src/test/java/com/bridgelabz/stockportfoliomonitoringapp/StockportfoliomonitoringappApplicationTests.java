@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 
 import com.bridgelabz.stockportfoliomonitoringapp.controller.AuthController;
@@ -77,7 +75,7 @@ class StockportfoliomonitoringappApplicationTests {
 		savedPortfolio.setName("My Portfolio");
 		savedPortfolio.setUser(user);
 
-		when(userRepository.findByUserId(userid)).thenReturn(user);
+		when(userRepository.findByUserId(userid)).thenReturn(user);  
 		when(portfolioRepository.save(any(Portfolio.class))).thenReturn(savedPortfolio);
 		when(userRepository.save(any(User.class))).thenReturn(user);
 		PortfolioResponseDto response = portfolioServiceImpl.createPortfolio(request, userid);
@@ -125,7 +123,6 @@ class StockportfoliomonitoringappApplicationTests {
 		when(service.registerUser(requestDto)).thenReturn(mockResponse);
 
 		ResponseEntity<RegisterResponseDto> response = authController.userRegisteration(requestDto);
-
 		assertEquals("shadow", response.getBody().getUsername());
 		assertEquals("User registered successfully", response.getBody().getMessage());
 	}
