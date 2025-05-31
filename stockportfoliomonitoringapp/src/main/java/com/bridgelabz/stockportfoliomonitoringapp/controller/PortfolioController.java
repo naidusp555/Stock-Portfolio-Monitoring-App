@@ -14,7 +14,7 @@ import com.bridgelabz.stockportfoliomonitoringapp.service.PortfolioService;
 
 
 @RestController
-@RequestMapping("/api/portfolios")
+@RequestMapping("/api/portfolios" )
 public class PortfolioController {
 
     @Autowired
