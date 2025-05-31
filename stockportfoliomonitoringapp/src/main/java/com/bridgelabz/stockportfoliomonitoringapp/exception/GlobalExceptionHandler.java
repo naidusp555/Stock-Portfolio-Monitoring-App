@@ -21,4 +21,9 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleGeneralException(Exception ex){
 		return new ResponseEntity<>("An unexpected error occured.", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public ResponseEntity<String> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex){
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+	}
 }

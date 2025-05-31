@@ -24,26 +24,29 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Autowired
     private PortfolioRepository portfolioRepository;
 
+
+
+
     @Autowired
     private HoldingRepository holdingRepository;
-    
+
     @Autowired
     private UserRepository userRepository;
-    
+
     //Fetch all portfolios
     @Override
- 	public PortfolioResponseDto getAllPortfolios(long userId) {
- 		
-    	 Optional<Portfolio> portfolio = portfolioRepository.findByUserUserId(userId);
-    	 if(!portfolio.isPresent()) {
-    		 throw new UserNotFoundException("Portfolio not found for userId: " + userId);
-    	 }
-    	
-    	 PortfolioResponseDto portfolioResponseDto = new PortfolioResponseDto();
-    	 portfolioResponseDto.setPortfolioId(portfolio.get().getPortfolioId());
-    	 portfolioResponseDto.setName(portfolio.get().getName());
-    	return portfolioResponseDto;
- 	}
+    public PortfolioResponseDto getAllPortfolios(long userId) {
+
+        Optional<Portfolio> portfolio = portfolioRepository.findByUserUserId(userId);
+        if(!portfolio.isPresent()) {
+            throw new UserNotFoundException("Portfolio not found for userId: " + userId);
+        }
+
+        PortfolioResponseDto portfolioResponseDto = new PortfolioResponseDto();
+        portfolioResponseDto.setPortfolioId(portfolio.get().getPortfolioId());
+        portfolioResponseDto.setName(portfolio.get().getName());
+        return portfolioResponseDto;
+    }
 
     //Create portfolio
     public PortfolioResponseDto createPortfolio(PortfolioRequestDto request, long userId) {
@@ -55,12 +58,10 @@ public class PortfolioServiceImpl implements PortfolioService {
         // Create and save portfolio
         Portfolio portfolio = new Portfolio();
         portfolio.setName(request.getName());
-        portfolio.setUser(user);
-        portfolio = portfolioRepository.save(portfolio); // generates portfolioId
-
-        // Update user with generated portfolio
+        portfolio.setUser(user);         // sets user in Portfolio ✅
         user.setPortfolio(portfolio);
-        userRepository.save(user); // updates user table with portfolioId
+        portfolio = portfolioRepository.save(portfolio); // generates portfolioId
+        user = userRepository.save(user); // updates user table with portfolioId
 
         // Prepare response DTO
         PortfolioResponseDto responseDto = new PortfolioResponseDto();
@@ -77,8 +78,8 @@ public class PortfolioServiceImpl implements PortfolioService {
                 .map(h -> new HoldingResponseDto(h.getStockSymbol(), h.getQuantity(), h.getBuyPrice()))
                 .collect(Collectors.toList());
     }
-    
 
- 	
 
-}    
+
+}
+

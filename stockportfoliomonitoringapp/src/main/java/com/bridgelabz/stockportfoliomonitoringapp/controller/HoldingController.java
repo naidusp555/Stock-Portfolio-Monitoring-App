@@ -1,6 +1,4 @@
 package com.bridgelabz.stockportfoliomonitoringapp.controller;
-
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,10 +15,6 @@ import com.bridgelabz.stockportfoliomonitoringapp.entity.Holding;
 import com.bridgelabz.stockportfoliomonitoringapp.service.HoldingService;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
-
-
 @RestController
 @RequestMapping("/api/holdings")
 public class HoldingController {
@@ -35,7 +29,6 @@ public class HoldingController {
 		return new ResponseEntity<HoldingResponseDto>(response, HttpStatus.OK);
 	}
 
-
 	//update holdings
 	@PutMapping("/{holdingId}")
 	public ResponseEntity<HoldingResponseDto> updateHolding(@PathVariable long holdingId, @RequestBody HoldingRequestDto holdingRequestDto){
@@ -43,7 +36,7 @@ public class HoldingController {
 		return new ResponseEntity<HoldingResponseDto>(updated, HttpStatus.OK);
 	}
 	
-	//Delection of holdings
+	//Deletion of holdings
 	@DeleteMapping("/{holdingId}")
 	public ResponseEntity<String> deleteHolding(@PathVariable Long holdingId){
 		String result = holdingService.deleteHoldingById(holdingId);
@@ -52,10 +45,4 @@ public class HoldingController {
 		}
 		return ResponseEntity.ok(result);
 	}
-
-
-
-
-	
-
 }
