@@ -8,6 +8,7 @@ import com.bridgelabz.stockportfoliomonitoringapp.entity.Alert;
 public interface AlertRepository extends JpaRepository<Alert, Long> {
 	
 	List<Alert> findByUserUserId(Long userId);
+	
 
 
 }

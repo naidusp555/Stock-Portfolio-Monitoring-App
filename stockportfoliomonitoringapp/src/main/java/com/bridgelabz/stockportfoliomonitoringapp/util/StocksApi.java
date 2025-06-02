@@ -7,6 +7,9 @@ import java.net.http.HttpResponse;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.URI;
 
@@ -17,15 +20,23 @@ public class StocksApi {
 	
 	
 //	@Scheduled(fixedDelay = 2000)
-	void fetchStockPrice() throws Exception {
+	public double fetchStockPrice(String stockSymbol) throws Exception {
 		
-		HttpRequest request = HttpRequest.newBuilder()
-			    .uri(URI.create("https://stock.indianapi.in/stock?name=sbin"))
-			    .header("X-Api-Key", "sk-live-qRr66nuYjV8fb2aizxdo3RW1eXl1KDEw5p9GDrj3")
-			    .method("GET", HttpRequest.BodyPublishers.noBody())
-			    .build();
-			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-			System.out.println(response.body());
+		 HttpRequest request = HttpRequest.newBuilder()
+	                .uri(URI.create("https://stock.indianapi.in/stock?name=" + stockSymbol))
+	                .header("X-Api-Key", "sk-live-zcgVbyHJVUpp4uEhVDWh2vI9xm1qEypSB4V28JD9")
+	                .method("GET", HttpRequest.BodyPublishers.noBody())
+	                .build();
+	        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+	        String jsonBody=response.body();
+	      
+	        ObjectMapper mapper = new ObjectMapper();
+	        JsonNode z=mapper.readTree(jsonBody);
+
+	        double price= z.get("currentPrice").get("NSE").asDouble();
+
+
+	        return price;
 	}
 
 }

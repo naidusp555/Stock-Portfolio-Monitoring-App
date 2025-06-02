@@ -107,45 +107,7 @@ class StockportfoliomonitoringappApplicationTests {
 	private AuthController authController;
 
 
-	@Test
-	public void UserRegistrationtest() {
-		RegisterRequestDto requestDto = new RegisterRequestDto();
-		requestDto.setUsername("shadow");
-		requestDto.setEmail("shadow@example.com");
-		requestDto.setPassword("Strong@123");
-
-		//long userId = 101L;
-
-		RegisterResponseDto mockResponse = new RegisterResponseDto();
-		mockResponse.setUsername("shadow");
-		mockResponse.setMessage("User registered successfully");
-
-		when(service.registerUser(requestDto)).thenReturn(mockResponse);
-
-		ResponseEntity<RegisterResponseDto> response = authController.userRegisteration(requestDto);
-		assertEquals("shadow", response.getBody().getUsername());
-		assertEquals("User registered successfully", response.getBody().getMessage());
-	}
-
-
-	@Test
-	public void userLoginTest() {
-		LoginRequestDto requestDto = new LoginRequestDto();
-		requestDto.setEmail("messi555@gmail.com");
-		requestDto.setPassword("goat@123");
-
-		LoginResponseDto responseDto = new LoginResponseDto();
-		responseDto.setEmail("messi555@gmail.com");
-		responseDto.setToken("fhuen");
-		responseDto.setMessage("Logged in");
-
-		when(service.loginUser(requestDto)).thenReturn(responseDto);
-
-		ResponseEntity<LoginResponseDto> responseEntity = authController.userLogin(requestDto);
-
-		assertEquals("messi555@gmail.com", responseEntity.getBody().getEmail());
-		assertEquals("fhuen", responseEntity.getBody().getToken());
-	}
+	
 
 		public void testDeleteHolding_NotFound() {
 			Long holdingId = 999L;

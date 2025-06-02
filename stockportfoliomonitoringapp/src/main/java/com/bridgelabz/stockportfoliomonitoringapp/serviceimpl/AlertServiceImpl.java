@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +25,8 @@ import com.bridgelabz.stockportfoliomonitoringapp.exception.UserNotFoundExceptio
 import com.bridgelabz.stockportfoliomonitoringapp.repository.AlertRepository;
 import com.bridgelabz.stockportfoliomonitoringapp.repository.UserRepository;
 import com.bridgelabz.stockportfoliomonitoringapp.service.AlertService;
+import com.bridgelabz.stockportfoliomonitoringapp.util.SendMail;
+import com.bridgelabz.stockportfoliomonitoringapp.util.StocksApi;
 
 @Service
 public class AlertServiceImpl implements AlertService{
@@ -33,7 +38,13 @@ public class AlertServiceImpl implements AlertService{
 	UserRepository userRepository;
 	
 	@Autowired
+    JavaMailSender mailSender;
+	
+	@Autowired
 	MailServiceImpl mailServiceImpl;
+	
+	@Autowired
+	StocksApi stocksApi;
 	
 	//set alert
 	public AlertPostResponseDto setAlert(long userId, AlertPostRequestDto alertPostRequestDto) {
@@ -101,8 +112,44 @@ public class AlertServiceImpl implements AlertService{
 		return updatedAlert;
 	}
 	
-	//Sending alertMail to any User
 	
+	//Sending alertMail to any User
+//	@Scheduled(fixedDelay = 2000)
+	public void alertMail() {
+	    List<Alert> log = alertRepository.findAll();
 
+	    for (Alert alert : log) {
+	        try {
+	            if (alert.isTriggered()) continue; 
+
+	            double currentPrice = stocksApi.fetchStockPrice(alert.getStockSymbol());
+	            double boughtPrice = alert.getPriceThreshold();
+
+	            if (currentPrice > boughtPrice) {
+	                User user = alert.getUser();
+	                String body = "Alert! The price of " + alert.getStockSymbol() + 
+	                              " is now ₹" + currentPrice + 
+	                              ", above your threshold ₹" + boughtPrice;
+	                sendEmail(user.getEmail(), "Stock Alert Triggered!", body);
+	                
+	                alert.setTriggered(true);
+	                alertRepository.save(alert);
+	            }
+	        } catch (Exception e) {
+	            // Log error
+	            System.err.println("Error processing alert for " + alert.getStockSymbol());
+	        }
+	    }
+	}
+
+	
+	public void sendEmail(String to, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("naidusp555@gmail.com");  
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
+    }
 
 }

@@ -13,10 +13,9 @@ public class Portfolio {
 
 	private String name;
 
-	@OneToOne
-	@JoinColumn(name = "user_id")  // This ensures user_id is stored in the portfolio table
+	@OneToOne(mappedBy = "portfolio")
 	private User user;
-
+	
 	@OneToMany(mappedBy = "portfolio")
 	private List<Holding> holdings;
 
