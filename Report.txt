@@ -1,3 +1,0 @@
-PortfolioReportLogId      Date            TotalGainLoss             TotalValue      PortfolioId 
-1                         2025-05-29      2574.640164567849000      34548.75        2           
-2                         2025-05-29      -35.545994566396985       34548.75        2           
