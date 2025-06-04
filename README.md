@@ -236,6 +236,7 @@ cd stock-portfolio-app
 
 ## API Documentation
 Visit: http://localhost:8080/swagger-ui.html
+----
 
 ## Authors
 - Siripurapu Papinaidu – Project Lead & Alert Module
