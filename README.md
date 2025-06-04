@@ -238,12 +238,12 @@ cd stock-portfolio-app
 Visit: http://localhost:8080/swagger-ui.html
 
 ## Authors
-Siripurapu Papinaidu – Project Lead & Alert Module
-Rohan R - Holdings Module and Testing
-Mohanraj V - Portfolio Module and Testing
-Karthik Singaram.B - User Module and Testing
-Vrutika Panikar - Portfolio Repot Module and Testing
-Janhvi Jaiswal - Portfolio Module, Holding Module and Testing
+- Siripurapu Papinaidu – Project Lead & Alert Module
+- Rohan R - Holdings Module and Testing
+- Mohanraj V - Portfolio Module and Testing
+- Karthik Singaram.B - User Module and Testing
+- Vrutika Panikar - Portfolio Repot Module and Testing
+- Janhvi Jaiswal - Portfolio Module, Holding Module and Testing
 
 ## Contributors
 Thanks to all contributors and testers involved in shaping this project!
