@@ -142,7 +142,7 @@ Finance / Personal Investment Management
 
 ##  Sample Configuration (`application.properties`)
 
-```properties
+
 #Application
 spring.application.name=stockportfoliomonitoringapp
 
@@ -167,6 +167,8 @@ spring.mail.username=your-email-here
 spring.mail.password=your-app-password-here
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
+
+---
 
 ##  Suggested Project Structure
 
@@ -243,7 +245,7 @@ Visit: http://localhost:8080/swagger-ui.html
 - Rohan R - Holdings Module and Testing
 - Mohanraj V - Portfolio Module and Testing
 - Karthik Singaram.B - User Module and Testing
-- Vrutika Panikar - Portfolio Repot Module and Testing
+- Vrutika Panikar - Portfolio Report Module and Testing
 - Janhvi Jaiswal - Portfolio Module, Holding Module and Testing
 
 ## Contributors
