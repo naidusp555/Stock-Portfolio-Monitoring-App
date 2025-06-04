@@ -1,6 +1,5 @@
-package com.bridgelabz.stockportfoliomonitoringapp.scheduler;
-
-public class PriceFetchScheduler {
-
-	
-}
+//package com.bridgelabz.stockportfoliomonitoringapp.scheduler;
+//
+//public class PriceFetchScheduler {
+//
+//}
