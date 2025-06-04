@@ -1,16 +1,16 @@
-#  Stock Portfolio Monitoring App
+# Stock Portfolio Monitoring App
 
 A Spring Boot-based backend system that allows users to securely manage their stock portfolios, receive alerts, and track real-time performance with role-based access, reports, and scheduled updates.
 
 ---
 
-##  Domain
+## Domain
 
 Finance / Personal Investment Management
 
 ---
 
-##  Objectives
+## Objectives
 
 - Enable users to register, authenticate, and securely manage multiple portfolios and stock holdings.
 - Fetch real-time stock prices using third-party APIs like Yahoo Finance.
@@ -21,10 +21,9 @@ Finance / Personal Investment Management
 - Provide daily portfolio summaries and support export in PDF/Excel format.
 - Enforce secure access using JWT authentication and role-based authorization (USER, ADMIN).
 
-
 ---
 
-##  Tech Stack
+## Tech Stack
 
 | Layer           | Technology                         |
 |----------------|-------------------------------------|
@@ -40,18 +39,18 @@ Finance / Personal Investment Management
 
 ---
 
-##  Key Modules
+## Key Modules
 
-- User & Role Management
-- Portfolio and Holding Management
-- Real-Time Stock Price Fetching
-- Alerts & Notifications
-- Gain/Loss Calculation
+- User & Role Management  
+- Portfolio and Holding Management  
+- Real-Time Stock Price Fetching  
+- Alerts & Notifications  
+- Gain/Loss Calculation  
 - Reporting (PDF/Excel)
 
 ---
 
-##  Roles & Access
+## Roles & Access
 
 | Role   | Access Description                             |
 |--------|------------------------------------------------|
@@ -60,14 +59,14 @@ Finance / Personal Investment Management
 
 ---
 
-##  Entity Overview
+## Entity Overview
 
 ### 1. User
-- id, username, email, password, role
+- id, username, email, password, role  
 - One-to-Many with Portfolios and Alerts
 
 ### 2. Portfolio
-- id, name, user
+- id, name, user  
 - One-to-Many with Holdings
 
 ### 3. Holding
@@ -84,68 +83,64 @@ Finance / Personal Investment Management
 
 ---
 
-##  REST API Endpoints
+## REST API Endpoints
 
-###  AuthController
-- POST `/api/auth/register`
+### AuthController
+- POST `/api/auth/register`  
 - POST `/api/auth/login`
 
-###  PortfolioController
-- GET `/api/portfolios`
-- POST `/api/portfolios`
+### PortfolioController
+- GET `/api/portfolios`  
+- POST `/api/portfolios`  
 - GET `/api/portfolios/{id}/holdings`
 
-###  HoldingController
-- POST `/api/holdings`
-- PUT `/api/holdings/{id}`
+### HoldingController
+- POST `/api/holdings`  
+- PUT `/api/holdings/{id}`  
 - DELETE `/api/holdings/{id}`
 
-###  AlertController
-- POST `/api/alerts`
-- GET `/api/alerts`
+### AlertController
+- POST `/api/alerts`  
+- GET `/api/alerts`  
 - PUT `/api/alerts/{id}`
 
-###  ReportController
-- GET `/api/reports/portfolio-summary`
+### ReportController
+- GET `/api/reports/portfolio-summary`  
 - GET `/api/reports/export?type=pdf|excel`
 
 ---
 
-##  Example Workflow
+## Example Workflow
 
 1. **User registers and logs in** to receive a JWT token for authenticated access.  
 2. **User creates one or more portfolios** and adds stock holdings (e.g., stock symbol, quantity, buy price).  
 3. **System fetches real-time stock prices** via scheduled jobs and caches them to improve performance.  
 4. **Gain/Loss is calculated** automatically for each holding and the entire portfolio.  
-5. **Alerts are evaluated**:
-   - If a stock price crosses a set threshold or portfolio loss exceeds a defined percentage, the alert is triggered.
-   - The system **sends an email notification** to the user using **JavaMailSender (JMS)**.
-   - Alerts can also be logged internally for auditing or retry purposes.
+5. **Alerts are evaluated**:  
+   - If a stock price crosses a set threshold or portfolio loss exceeds a defined percentage, the alert is triggered.  
+   - The system **sends an email notification** to the user using **JavaMailSender (JMS)**.  
+   - Alerts can also be logged internally for auditing or retry purposes.  
 6. **Reports are generated** summarizing the portfolio's status, which users can **export as PDF or Excel**.
-
 
 ---
 
-##  ER Diagram
+## ER Diagram
 
 ![ER Diagram](https://github.com/user-attachments/assets/f2d3dedc-974e-4328-96be-4ad878c4d989)
 
-
-
 ---
 
-##  Class Diagram
+## Class Diagram
 
 ![Class Diagram](https://github.com/user-attachments/assets/81cc88e3-56b2-4706-9bf0-3c7bab36ecac)
 
 ---
 
-##  Sample Configuration (`application.properties`)
+## Sample Configuration (`application.properties`)
 
-
-#Application
+```properties
+# Application
 spring.application.name=stockportfoliomonitoringapp
-
 server.port=8080
 
 # MySQL Database Configuration
@@ -153,30 +148,32 @@ spring.datasource.url=jdbc:mysql://localhost:3306/springboot_team_db
 spring.datasource.username=your-mysql-username-here
 spring.datasource.password=your-mysql-password-here
 
-#JPA configuration
+# JPA configuration
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
-#Swagger
+# Swagger
 springdoc.swagger-ui.path=/docs
 
-#JSM
+# JavaMailSender (JMS)
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
 spring.mail.username=your-email-here
 spring.mail.password=your-app-password-here
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
+```
 
 ---
 
-##  Suggested Project Structure
+## Suggested Project Structure
 
+```
 com.bridgelabz.stockportfoliomonitoringapp
 │
 ├── config               # Security, JWT, Swagger
 ├── controller           # API controllers
-├── dto                 # Data Transfer Objects
+├── dto                  # Data Transfer Objects
 ├── entity               # JPA entities
 ├── exception            # Custom exceptions
 ├── repository           # Spring Data JPA interfaces
@@ -185,22 +182,22 @@ com.bridgelabz.stockportfoliomonitoringapp
 ├── serviceimpl          # Implementations of services
 ├── util                 # Utility classes (email, calculator, export)
 └── StockPortfolioApplication.java
-
-
----
-
-##  Optional Enhancements
-
-| Feature                 | Technology              |
-|------------------------|-------------------------|
-| Real-time updates       | WebSockets              |
-| AI-based buy/sell advice| ML Model Integration    |
-| Google Sheets sync      | Sheets API              |
-| Mobile-optimized APIs   | REST Best Practices     |
+```
 
 ---
 
-##  Suggested Sprints
+## Optional Enhancements
+
+| Feature                  | Technology              |
+|--------------------------|-------------------------|
+| Real-time updates        | WebSockets              |
+| AI-based buy/sell advice | ML Model Integration    |
+| Google Sheets sync       | Sheets API              |
+| Mobile-optimized APIs    | REST Best Practices     |
+
+---
+
+## Suggested Sprints
 
 | Day  | Deliverables                                         |
 |------|------------------------------------------------------|
@@ -213,17 +210,17 @@ com.bridgelabz.stockportfoliomonitoringapp
 
 ---
 
-##  How to Run the Project
+## How to Run the Project
 
-###  Prerequisites
+### Prerequisites
 
-- Java 17+
-- Maven
-- MySQL
-- Swagger UI
+- Java 17+  
+- Maven  
+- MySQL  
+- Swagger UI  
 - JMS
 
-###  Steps
+### Steps
 
 ```bash
 # Clone the repository
@@ -235,20 +232,23 @@ cd stock-portfolio-app
 # Build and run
 ./mvnw clean install
 ./mvnw spring-boot:run
+```
 
-## API Documentation
-Visit: http://localhost:8080/swagger-ui.html
-----
+Visit: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) for API documentation.
+
+---
 
 ## Authors
-- Siripurapu Papinaidu – Project Lead & Alert Module
-- Rohan R - Holdings Module and Testing
-- Mohanraj V - Portfolio Module and Testing
-- Karthik Singaram.B - User Module and Testing
-- Vrutika Panikar - Portfolio Report Module and Testing
-- Janhvi Jaiswal - Portfolio Module, Holding Module and Testing
+
+- **Siripurapu Papinaidu** – Project Lead & Alert Module  
+- **Rohan R** - Holdings Module and Testing  
+- **Mohanraj V** - Portfolio Module and Testing  
+- **Karthik Singaram.B** - User Module and Testing  
+- **Vrutika Panikar** - Portfolio Report Module and Testing  
+- **Janhvi Jaiswal** - Portfolio Module, Holding Module and Testing
+
+---
 
 ## Contributors
+
 Thanks to all contributors and testers involved in shaping this project!
-
-
